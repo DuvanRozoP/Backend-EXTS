@@ -17,10 +17,14 @@
 
 # and uncomment the following lines
 # .pnp.*
+.pnp.cjs
+.pnp.loader.mjs
 
 # End of https://www.toptal.com/developers/gitignore/api/yarn.
 .yarn/*
 node_modules/*
-.pnp.cjs
-.pnp.loader.mjs
+dist/*
 yarn.lock
+.yarnrc.yml
+package-lock.json
+.env

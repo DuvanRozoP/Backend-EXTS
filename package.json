@@ -1,17 +1,34 @@
 {
   "name": "Backend-EXTS",
   "packageManager": "yarn@3.6.0",
+  "scripts": {
+    "build": "NODE_ENV=production webpack --mode production",
+    "dev": "nodemon --exec ts-node src/server.ts",
+    "start": "nodemon -c nodemon.json"
+  },
   "dependencies": {
+    "dotenv": "^16.3.1",
     "express": "^4.18.2",
+    "path": "^0.12.7",
+    "ts-loader": "^9.4.4",
     "typescript": "^5.1.6"
   },
   "devDependencies": {
+    "@babel/core": "^7.22.5",
+    "@babel/preset-env": "^7.22.5",
+    "@types/dotenv": "^8.2.0",
+    "@types/express": "^4.17.17",
+    "@types/node": "^20.3.2",
     "@typescript-eslint/eslint-plugin": "^5.60.1",
     "@typescript-eslint/parser": "^5.60.1",
+    "babel-loader": "^9.1.2",
     "eslint": "^8.43.0",
     "eslint-config-prettier": "^8.8.0",
     "eslint-plugin-prettier": "^4.2.1",
     "nodemon": "^2.0.22",
-    "prettier": "^2.8.8"
+    "prettier": "^2.8.8",
+    "ts-node": "^10.9.1",
+    "webpack": "^5.88.1",
+    "webpack-cli": "^5.1.4"
   }
 }
