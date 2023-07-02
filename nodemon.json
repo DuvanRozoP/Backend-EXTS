@@ -3,8 +3,8 @@
   "restartable": "App se reiniciará al guardar cambios",
   "watch": ["./src"],
   "ext": "ts",
-  "delay": "1000",
-  "exec": "clear && ts-node ./src/server.ts",
+  "delay": "2000",
+  "exec": "clear && yarn run build:webpack && yarn run start:webpack",
   "events": {
     "start": "echo 🚀 Iniciando la aplicación! ✨",
     "restart": "echo 🤔 Reiniciando la aplicación! ⏳"
