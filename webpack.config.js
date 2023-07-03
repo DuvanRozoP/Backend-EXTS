@@ -3,25 +3,12 @@ const { config } = require('dotenv');
 const nodeExternals = require('webpack-node-externals');
 const TerserPlugin = require('terser-webpack-plugin');
 const { CleanWebpackPlugin } = require('clean-webpack-plugin');
+const scriptWebpackPlugin = require('./modules/script/scriptWebpackPlugin');
 config();
 const MESSAGE_SERVER = process.env.MESSAGE_SERVER;
 const MODE = process.env.MODE;
-
-const CustomMessagePlugin = {
-  apply: (compiler) => {
-    compiler.hooks.done.tap('CustomMessagePlugin', (stats) => {
-      const namespace = stats.compilation.outputOptions.devtoolNamespace;
-      const message = `${namespace} La compilación ha finalizado.`;
-      console.log('\x1b[1m\x1b[32m%s\x1b[0m', `${MESSAGE_SERVER} ${message}`);
-    });
-  },
-};
-
 module.exports = {
-  entry: [
-    './modules/server.ts',
-    ...(MODE === 'dev' ? ['./modules/dev/messageLog.ts'] : []),
-  ],
+  entry: ['./modules/lib/server.exts.ts'],
   target: 'node',
   mode: MODE === 'dev' ? 'development' : 'production',
   externals: [nodeExternals()],
@@ -44,7 +31,7 @@ module.exports = {
       '@modules': path.resolve(__dirname, 'modules/'),
     },
   },
-  stats: 'none', // {errorDetails: true,},
+  stats: 'none', // { errorDetails: true },
   module: {
     rules: [
       {
@@ -54,7 +41,18 @@ module.exports = {
       },
     ],
   },
-  plugins: [new CleanWebpackPlugin(), CustomMessagePlugin],
+  plugins: [
+    new CleanWebpackPlugin(),
+    new scriptWebpackPlugin({
+      scripts: [
+        'ts-node modules/scriptTS/endpoints.ts',
+        'ts-node modules/scriptTS/server.ts',
+      ],
+      catchMessage: `${MESSAGE_SERVER} Error execute Scripts ⛔`,
+      doneMessage: `${MESSAGE_SERVER} Complete execute Scripts 🟢`,
+      doneCompilationMessage: `${MESSAGE_SERVER} Bulding Complete 👷‍♀️`,
+    }),
+  ],
   optimization: {
     minimize: true,
     minimizer: [
