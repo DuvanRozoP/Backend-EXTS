@@ -1,13 +1,25 @@
 {
-    "compilerOptions": {
-      "target": "es6",
-      "module": "commonjs",
-      "outDir": "dist",
-      "strict": true,
-      "esModuleInterop": true
-    },
-    "exclude": [
-      "node_modules"
-    ]
-  }
-  
+  "compilerOptions": {
+    "sourceMap": false,
+    "target": "ESNext",
+    "module": "NodeNext",
+    "moduleResolution": "node",
+    "resolveJsonModule": true,
+    "outDir": "dist",
+    "strict": true,
+    "esModuleInterop": true,
+    "baseUrl": ".",
+    "paths": {
+      "@/*": ["src/*"],
+      "@controller/*": ["src/controller/*"],
+      "@helpers/*": ["src/helpers/*"],
+      "@models/*": ["src/models/*"],
+      "@network/*": ["src/network/*"],
+      "@store/*": ["src/store/*"],
+      "@cache/*": ["src/cache/*"],
+      "@template/*": ["modules/templates/*"],
+      "@modules/*": ["modules/*"]
+    }
+  },
+  "exclude": ["node_modules",".yarn"]
+}
