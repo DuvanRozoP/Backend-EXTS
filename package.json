@@ -4,8 +4,6 @@
   "scripts": {
     "start:webpack": "node dist/main.bundle.js",
     "build:webpack": "webpack --config webpack.config.js",
-    "build:tsc": "tsc && node dist/main.bundle.js",
-    "router": "ts-node src/server.ts",
     "dev": "nodemon -c nodemon.json"
   },
   "dependencies": {
