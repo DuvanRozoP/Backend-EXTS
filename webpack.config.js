@@ -5,7 +5,6 @@ const TerserPlugin = require('terser-webpack-plugin');
 const { CleanWebpackPlugin } = require('clean-webpack-plugin');
 const scriptWebpackPlugin = require('./modules/script/scriptWebpackPlugin');
 config();
-const MESSAGE_SERVER = process.env.MESSAGE_SERVER;
 const MODE = process.env.MODE;
 module.exports = {
   entry: ['./modules/lib/server.exts.ts'],
@@ -48,9 +47,9 @@ module.exports = {
         'ts-node modules/scriptTS/endpoints.ts',
         'ts-node modules/scriptTS/server.ts',
       ],
-      catchMessage: `${MESSAGE_SERVER} Error execute Scripts ⛔`,
-      doneMessage: `${MESSAGE_SERVER} Complete execute Scripts 🟢`,
-      doneCompilationMessage: `${MESSAGE_SERVER} Bulding Complete 👷‍♀️`,
+      catchMessage: 'Error execute Scripts ⛔',
+      doneMessage: 'Complete execute Scripts 🟢',
+      doneCompilationMessage: 'Bulding Complete 👷‍♀️',
     }),
   ],
   optimization: {
@@ -94,14 +93,5 @@ module.exports = {
         },
       },
     },
-  },
-  devServer: {
-    static: {
-      directory: path.resolve(__dirname, 'dist'), // Directorio base del servidor de desarrollo
-    },
-    compress: true,
-    port: 3000,
-    hot: true,
-    open: true,
   },
 };

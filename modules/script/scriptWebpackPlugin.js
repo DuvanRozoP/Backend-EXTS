@@ -13,16 +13,14 @@ class scriptWebpackPlugin {
       } else if (typeof scripts === 'string') {
         await this.executeScript(scripts);
       }
-    }); 
+    });
 
     compiler.hooks.done.tap('ScriptWebpackPlugin', (stats) => {
-      const namespace = stats.compilation.outputOptions.devtoolNamespace;
       const { doneCompilationMessage } = this.options;
       const message = doneCompilationMessage ?? '';
       console.log(
         '\x1b[1m\x1b[32m%s\x1b[0m',
-        `${message} [${namespace}] La compilación ha finalizado` ||
-          'Done Compilation'
+        `[EXTS] ${message}` || 'Done Compilation'
       );
     });
   }
@@ -43,17 +41,20 @@ class scriptWebpackPlugin {
         if (error) {
           console.log(
             '\x1b[1m\x1b[31m%s\x1b[0m',
-            `${catchM} ${error.message} 🔴⁉️`
+            `[EXTS] ${catchM} ${error.message} 🔴⁉️`
           );
           resolve();
           return;
         }
         if (stderr) {
-          console.log('\x1b[1m\x1b[33m%s\x1b[0m', `${catchM} ${stderr} 🟡⁉️`);
+          console.log(
+            '\x1b[1m\x1b[33m%s\x1b[0m',
+            `[EXTS] ${catchM} ${stderr} 🟡⁉️`
+          );
           resolve();
           return;
         }
-        console.log('\x1b[1m\x1b[32m%s\x1b[0m', doneM);
+        console.log('\x1b[1m\x1b[32m%s\x1b[0m', `[EXTS] ${doneM}`);
         resolve();
       });
     });
